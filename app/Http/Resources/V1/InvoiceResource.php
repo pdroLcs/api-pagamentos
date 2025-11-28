@@ -8,14 +8,13 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class InvoiceResource extends JsonResource
 {
+    private array $types = ['C' => 'Cartão', 'B' => 'Boleto', 'P' => 'Pix'];
+    
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
-
-    private array $types = ['C' => 'Cartão', 'B' => 'Boleto', 'P' => 'Pix'];
-
     public function toArray(Request $request): array
     {
         $paid = $this->paid;
