@@ -15,15 +15,16 @@ class AuthController extends Controller
 
         if (Auth::attempt($request->only('email', 'password'))) {
             return $this->response('Authorized', 200, [
-                'token' => $request->user()->createToken('invoice', ['teste-index'])->plainTextToken
+                'token' => $request->user()->createToken('invoice')->plainTextToken
             ]);
         }
         return $this->response('Not authorized', 403);
 
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-
+        $request->user()->currentAccessToken()->delete();
+        return $this->response('Token Revoked', 200);
     }
 }
